@@ -42,13 +42,16 @@ _app.produceResult = (limit, successes, errors) => {
     console.log('');
 
     errors.forEach(testError => {
-      console.log('\x1b[32m%s\x1b[0m', testError.name);
+      console.log('\x1b[31m%s\x1b[0m', testError.name);
+      console.log(testError.error);
+      console.log('');
     });
 
     console.log('');
     console.log('====== END ERROR DETAILS =======');
+    console.log('');
   }
-
+  console.log('');
   console.log('====== END TEST REPORT =======');
 };
 

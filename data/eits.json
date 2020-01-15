@@ -43,5 +43,13 @@
     "age": "24",
     "country": "Zimbabwe",
     "createdBy": "jane.doe@gmail.com"
+  },
+  {
+    "id": "rw3ex1potbvgh5h00f7y",
+    "firstName": "Michael",
+    "lastName": "Hammond",
+    "age": "24",
+    "country": "Zimbabwe",
+    "createdBy": "jane.doe@gmail.com"
   }
 ]

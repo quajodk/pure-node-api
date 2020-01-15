@@ -119,7 +119,7 @@ _users.get = (data, callback) => {
 // optional data: name, password
 // @TODO: authorization and authentication
 _users.put = (data, callback) => {
-  let {email, password} = data.payload;
+  let {email, password, name} = data.payload;
 
   typeof email == 'string' && email.trim().length > 0 ? email.trim() : false;
   password =
@@ -134,8 +134,8 @@ _users.put = (data, callback) => {
       if (!err && user) {
         // check if one of the optional data was sent
         if (name || password) {
-          if (email) {
-            user.email = email;
+          if (name) {
+            user.name = name;
           }
           if (password) {
             // hash password before saving
