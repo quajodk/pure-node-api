@@ -5,6 +5,7 @@
 const data = require('../lib/data');
 const helpers = require('../lib/helpers');
 const assert = require('assert');
+const util = require('util');
 
 // unit object
 const unit = {};
@@ -102,45 +103,63 @@ unit['data.updateEit should callback false error'] = done => {
 // assert data.create callback 201
 unit['data.create should callback 201 statusCode: created'] = done => {
   const fileName = testUser.email.split('@')[0];
-  data.create('users', fileName, testUser, err => {
-    assert.strictEqual(err, false);
-    done();
-  });
+  util
+    .promisify(data.create)('users', fileName, testUser)
+    .then()
+    .catch(err => {
+      assert.strictEqual(err, false);
+    });
+  done();
 };
 
 // assert data.read callback false and return object data
 unit['data.read should callback false error and return object data'] = done => {
-  data.read('users', 'jane.doe', (err, data) => {
-    assert.strictEqual(err, false);
-    assert.strictEqual(typeof data, 'object');
-    done();
-  });
+  util
+    .promisify(data.read)('users', 'jane.doe')
+    .then(data => {
+      assert.strictEqual(typeof data, 'object');
+    })
+    .catch(err => {
+      assert.strictEqual(err, false);
+    });
+  done();
 };
 
 // // assert data.updated callback error false
 unit['data.update should callback false error'] = done => {
   testUser.name = 'some test data here';
   const fileName = testUser.email.split('@')[0];
-  data.update('users', fileName, testUser, err => {
-    assert.strictEqual(err, false);
-    done();
-  });
+  util
+    .promisify(data.update)('users', fileName, testUser)
+    .then()
+    .catch(err => {
+      assert.strictEqual(err, false);
+    });
+  done();
 };
 
 // // assert data.list callback and return array of data
 unit['data.list should callback false error and array of data'] = done => {
-  data.list('users', (err, users) => {
-    assert.strictEqual(err, false);
-  });
+  util
+    .promisify(data.list)('users')
+    .then(users => {
+      assert.strictEqual(Array.isArray(users), true);
+    })
+    .catch(err => {
+      assert.strictEqual(err, false);
+    });
   done();
 };
 
 // assert data.delete callback false
 unit['data.delete should callback false error'] = done => {
   const fileName = testUser.email.split('@')[0];
-  data.delete('users', fileName, err => {
-    assert.strictEqual(err, false);
-  });
+  util
+    .promisify(data.delete)('users', fileName)
+    .then()
+    .catch(err => {
+      assert.strictEqual(err, false);
+    });
   done();
 };
 
